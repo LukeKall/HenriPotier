@@ -1,0 +1,9 @@
+apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
+
+android {
+    namespace = "com.example.testbase.domain"
+}
+
+dependencies {
+    implementation libs.core.ktx
+}

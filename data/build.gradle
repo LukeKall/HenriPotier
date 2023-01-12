@@ -1,0 +1,16 @@
+plugins {
+    alias(libs.plugins.kotlin.serialization)
+}
+apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
+
+android {
+    namespace = "com.example.testbase.data"
+}
+
+dependencies {
+    implementation libs.core.ktx
+    implementation libs.retrofit
+    implementation libs.okhttp3
+    implementation libs.kotlin.serialization
+    implementation libs.retrofit.kotlin.serialization.converter
+}

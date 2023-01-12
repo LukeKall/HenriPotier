@@ -1,0 +1,19 @@
+apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
+
+android {
+    namespace = "com.example.testbase.designsystem"
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+}
+
+dependencies {
+    implementation libs.core.ktx
+    implementation libs.compose.ui
+    implementation libs.compose.ui.preview
+    implementation libs.compose.material3
+    implementation libs.accompanist.systemuicontrollerr
+}

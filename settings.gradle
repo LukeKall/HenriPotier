@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    versionCatalogs {
+        // declares an additional catalog, named 'testLibs', from the 'test-libs.versions.toml' file
+        testLibs {
+            from(files('gradle/test-libs.versions.toml'))
+        }
+    }
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Test Base"
+include ':app'
+include ':domain'
+include ':data'
+include ':designsystem'

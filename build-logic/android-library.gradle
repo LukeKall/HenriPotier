@@ -1,0 +1,2 @@
+apply plugin: libs.plugins.android.library.get().pluginId
+apply from: "$rootProject.projectDir/build-logic/android-configuration.gradle"
