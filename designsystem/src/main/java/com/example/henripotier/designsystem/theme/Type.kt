@@ -1,4 +1,4 @@
-package com.example.testbase.designsystem.theme
+package com.example.henripotier.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -4,7 +4,7 @@ plugins {
 apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
 
 android {
-    namespace = "com.example.testbase.data"
+    namespace = "com.example.henripotier.data"
 }
 
 dependencies {

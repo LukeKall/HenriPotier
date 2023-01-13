@@ -4,9 +4,9 @@ plugins {
 apply from: "$rootProject.projectDir/build-logic/android-configuration.gradle"
 
 android {
-    namespace = "com.example.testbase"
+    namespace = "com.example.henripotier"
     defaultConfig {
-        applicationId "com.example.testbase"
+        applicationId "com.example.henripotier"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true

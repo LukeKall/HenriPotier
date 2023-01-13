@@ -1,7 +1,7 @@
-package com.example.testbase
+package com.example.henripotier
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class TestBaseApplication : Application()
+class HenriPotierApplication : Application()

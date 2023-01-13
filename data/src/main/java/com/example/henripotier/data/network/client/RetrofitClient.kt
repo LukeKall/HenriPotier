@@ -1,4 +1,4 @@
-package com.example.testbase.data.network.client
+package com.example.henripotier.data.network.client
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi

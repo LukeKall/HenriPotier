@@ -1,8 +1,8 @@
-package com.example.testbase.data.di
+package com.example.henripotier.data.di
 
 import android.content.Context
-import com.example.testbase.data.R
-import com.example.testbase.data.network.client.RetrofitClient
+import com.example.henripotier.data.R
+import com.example.henripotier.data.network.client.RetrofitClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

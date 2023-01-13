@@ -1,7 +1,7 @@
 apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
 
 android {
-    namespace = "com.example.testbase.domain"
+    namespace = "com.example.henripotier.domain"
 }
 
 dependencies {
