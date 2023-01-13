@@ -1,0 +1,10 @@
+apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
+
+android {
+    namespace = "com.example.henripotier.mvi"
+}
+
+dependencies {
+    implementation libs.core.ktx
+    implementation libs.lifecycle.viewmodel
+}
