@@ -2,7 +2,12 @@ package com.example.henripotier.data.di
 
 import android.content.Context
 import com.example.henripotier.data.R
+import com.example.henripotier.data.book.RemoteBookDataSource
+import com.example.henripotier.data.book.RemoteBookRepository
+import com.example.henripotier.data.book.RetrofitBookDataSource
 import com.example.henripotier.data.network.client.RetrofitClient
+import com.example.henripotier.domain.repository.BookRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,8 +18,18 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+interface DataModule {
 
+    @Binds
+    fun bindsBookRepository(remoteBookRepository: RemoteBookRepository): BookRepository
+
+    @Binds
+    fun bindsNetworkBookDataSource(retrofitBookDataSource: RetrofitBookDataSource): RemoteBookDataSource
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+class NetworkModule {
     @Provides
     @Singleton
     fun providesRetrofitClient(@ApplicationContext context: Context): Retrofit =

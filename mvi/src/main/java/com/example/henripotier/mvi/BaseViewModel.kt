@@ -3,27 +3,33 @@ package com.example.henripotier.mvi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel(initialState: UIState = EmptyState) : ViewModel() {
 
     private val actionsChannel = Channel<Action>()
-    private val state = MutableStateFlow<UIState>(EmptyState)
-    private val events = MutableSharedFlow<UIEvent>()
+    private val _state = MutableStateFlow(initialState)
+    val state: StateFlow<UIState>
+        get() = _state.asStateFlow()
+    private val _events = MutableSharedFlow<UIEvent>()
+    val events: SharedFlow<UIEvent>
+        get() = _events.asSharedFlow()
 
     init {
         viewModelScope.launch {
             for (action in actionsChannel) {
-                action.invoke(state.value)
+                action.invoke(_state.value)
             }
         }
     }
 
-    fun makeAction(action: Action) {
-        actionsChannel.trySend(action)
+    fun makeAction(action: Action.(UIState) -> Unit) {
+        actionsChannel.trySend(object : Action {
+            override suspend fun invoke(currentState: UIState) {
+                action(currentState)
+            }
+        })
     }
 
     override fun onCleared() {
@@ -32,10 +38,10 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun Action.setState(state: UIState) {
-        this@BaseViewModel.state.update { state }
+        this@BaseViewModel._state.update { state }
     }
 
     protected suspend fun Action.sendEvent(event: UIEvent) {
-        this@BaseViewModel.events.emit(event)
+        this@BaseViewModel._events.emit(event)
     }
 }

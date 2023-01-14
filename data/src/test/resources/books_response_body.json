@@ -1,0 +1,32 @@
+[
+  {
+    "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
+    "title": "Henri Potier à l'école des sorciers",
+    "price": 35,
+    "cover": "https://url1.com",
+    "synopsis": [
+      "sysnopsis00",
+      "sysnopsis01"
+    ]
+  },
+  {
+    "isbn": "a460afed-e5e7-4e39-a39d-c885c05db861",
+    "title": "Henri Potier et la Chambre des secrets",
+    "price": 25,
+    "cover": "https://url2.com",
+    "synopsis": [
+      "sysnopsis10",
+      "sysnopsis11"
+    ]
+  },
+  {
+    "isbn": "fcd1e6fa-a63f-4f75-9da4-b560020b6acc",
+    "title": "Henri Potier et le Prisonnier d'Azkaban",
+    "price": 30,
+    "cover": "https://url3.com",
+    "synopsis": [
+      "sysnopsis10",
+      "sysnopsis11"
+    ]
+  }
+]

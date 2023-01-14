@@ -31,6 +31,13 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 kapt {
@@ -40,4 +47,8 @@ kapt {
 dependencies {
     implementation libs.hilt
     kapt libs.hilt.compiler
+    testImplementation testLibs.junit
+    testImplementation testLibs.mockk
+    testImplementation testLibs.kotlin.test
+    testImplementation testLibs.kotlin.coroutine.test
 }

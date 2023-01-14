@@ -1,5 +1,5 @@
 package com.example.henripotier.mvi
 
-fun interface Action {
+interface Action {
     suspend fun invoke(currentState: UIState)
 }

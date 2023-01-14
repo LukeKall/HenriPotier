@@ -1,0 +1,28 @@
+apply from: "$rootProject.projectDir/build-logic/android-library.gradle"
+
+android {
+    namespace = "com.example.henripotier.bookpurchase"
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+}
+
+dependencies {
+    implementation project(":designsystem")
+    implementation project(":domain")
+    implementation project(":mvi")
+
+    implementation libs.core.ktx
+    implementation libs.compose.ui
+    implementation libs.compose.ui.preview
+    implementation libs.compose.material3
+    implementation libs.compose.foundation
+    implementation libs.compose.lifecycle
+    implementation libs.navigation
+    implementation libs.compose.navigation
+    implementation libs.hilt.navigation
+    implementation libs.glide
+}
