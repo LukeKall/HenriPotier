@@ -1,5 +1,6 @@
 package com.example.henripotierbookpurchase.catalog
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,35 +21,60 @@ import com.example.henripotier.designsystem.component.Price
 import com.example.henripotier.designsystem.component.ToolbarText
 import com.example.henripotier.designsystem.theme.*
 import com.example.henripotier.domain.model.Book
+import com.example.henripotier.mvi.EventListener
 import java.util.*
 
 @OptIn(ExperimentalLifecycleComposeApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun BookCatalogScreen(bookCatalogViewModel: BookCatalogViewModel) {
+internal fun BookCatalogScreen(
+    bookCatalogViewModel: BookCatalogViewModel,
+    goToBookDetail: (Book.ISBN) -> Unit
+) {
     val state = bookCatalogViewModel.state.collectAsStateWithLifecycle().value
+    EventListener(bookCatalogViewModel.events) { event, _ ->
+        when (event) {
+            is BookCatalogEvent.GoToBookDetail -> goToBookDetail(event.isbn)
+        }
+    }
     Scaffold(
         topBar = { CenterAlignedTopAppBar(title = { ToolbarText(stringResource(R.string.catalog_name)) }) },
         modifier = Modifier.statusBarsPadding()
     ) {
         when (state) {
             is BookCatalogState.Loading -> Loader()
-            is BookCatalogState.Loaded -> BookList(state.books, Modifier.padding(it))
+            is BookCatalogState.Loaded -> BookList(
+                books = state.books,
+                onBookClicked = bookCatalogViewModel::seeBookDetail,
+                modifier = Modifier.padding(it)
+            )
         }
     }
 }
 
 @Composable
-private fun BookList(books: List<Book>, modifier: Modifier = Modifier) =
-    LazyColumn(contentPadding = PaddingValues(padding16), verticalArrangement = Arrangement.spacedBy(padding10), modifier = modifier) {
-        items(books) {
-            BookItem(it)
+private fun BookList(
+    books: List<Book>,
+    onBookClicked: (Book.ISBN) -> Unit,
+    modifier: Modifier = Modifier
+) = LazyColumn(
+    contentPadding = PaddingValues(padding16),
+    verticalArrangement = Arrangement.spacedBy(padding10),
+    modifier = modifier
+) {
+    items(books) {
+        BookItem(it) {
+            onBookClicked(it.isbn)
         }
     }
+}
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-private fun BookItem(book: Book) =
-    Card(Modifier.height(BookCardHeight)) {
+private fun BookItem(book: Book, onClick: () -> Unit) =
+    Card(
+        Modifier
+            .height(BookCardHeight)
+            .clickable { onClick() }) {
         Row {
             GlideImage(
                 model = book.coverUrl,

@@ -1,4 +1,7 @@
 <resources>
     <string name="catalog_name">Catalogue Henri Potier</string>
-    <string name="back">Retour</string>
+    <string name="book_detail">Détail du produit</string>
+    <string name="book_isbn">Isbn : %1$s</string>
+    <string name="book_loading_error">Désolé, une erreur est survenue. Veuillez réessayer.</string>
+    <string name="retry">Réessayer</string>
 </resources>

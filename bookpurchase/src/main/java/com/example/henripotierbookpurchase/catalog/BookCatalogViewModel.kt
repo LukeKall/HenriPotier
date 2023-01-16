@@ -1,6 +1,7 @@
 package com.example.henripotierbookpurchase.catalog
 
 import androidx.lifecycle.viewModelScope
+import com.example.henripotier.domain.model.Book
 import com.example.henripotier.domain.usecase.GetBookCatalogUseCase
 import com.example.henripotier.mvi.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,5 +20,9 @@ class BookCatalogViewModel @Inject constructor(getBookCatalogUseCase: GetBookCat
                 }
             }
         }
+    }
+
+    fun seeBookDetail(isbn: Book.ISBN) = makeAction {
+        sendEvent(BookCatalogEvent.GoToBookDetail(isbn))
     }
 }

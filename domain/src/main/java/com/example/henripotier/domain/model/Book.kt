@@ -8,5 +8,5 @@ data class Book(
     val synopsis: List<String>
 ) {
     @JvmInline
-    value class ISBN(private val value: String)
+    value class ISBN(val value: String)
 }

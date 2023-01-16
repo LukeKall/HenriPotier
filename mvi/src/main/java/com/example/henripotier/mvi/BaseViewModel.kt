@@ -24,7 +24,7 @@ abstract class BaseViewModel(initialState: UIState = EmptyState) : ViewModel() {
         }
     }
 
-    fun makeAction(action: Action.(UIState) -> Unit) {
+    fun makeAction(action: suspend Action.(UIState) -> Unit) {
         actionsChannel.trySend(object : Action {
             override suspend fun invoke(currentState: UIState) {
                 action(currentState)
