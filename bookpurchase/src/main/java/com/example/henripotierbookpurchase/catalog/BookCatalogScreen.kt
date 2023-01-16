@@ -16,11 +16,10 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.henripotier.bookpurchase.R
 import com.example.henripotier.designsystem.component.Loader
+import com.example.henripotier.designsystem.component.Price
 import com.example.henripotier.designsystem.component.ToolbarText
 import com.example.henripotier.designsystem.theme.*
 import com.example.henripotier.domain.model.Book
-import com.example.henripotier.domain.model.CENT
-import java.text.NumberFormat
 import java.util.*
 
 @OptIn(ExperimentalLifecycleComposeApi::class, ExperimentalMaterial3Api::class)
@@ -74,18 +73,13 @@ private fun BookItem(book: Book) =
                             overflow = TextOverflow.Ellipsis
                         )
                     }
-                    Spacer(Modifier.size(padding12))
                 }
-                Text(
-                    text = formatPrice(book.priceInCents),
-                    style = MaterialTheme.typography.titleSmall,
+                Spacer(Modifier.size(padding12))
+                Price(
+                    priceInCents = book.priceInCents,
                     modifier = Modifier.align(Alignment.End)
                 )
             }
         }
     }
 
-fun formatPrice(priceInCents: Int): String =
-    NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-        currency = Currency.getInstance(Locale.FRANCE)
-    }.format(priceInCents / CENT.toDouble())

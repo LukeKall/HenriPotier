@@ -11,6 +11,8 @@ android {
 }
 
 dependencies {
+    implementation project(":domain")
+
     implementation libs.core.ktx
     implementation libs.compose.ui
     implementation libs.compose.ui.preview
