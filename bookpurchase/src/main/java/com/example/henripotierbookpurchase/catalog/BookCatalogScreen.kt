@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,13 +43,28 @@ internal fun BookCatalogScreen(
     ) {
         when (state) {
             is BookCatalogState.Loading -> Loader()
-            is BookCatalogState.Loaded -> BookList(
+            is BookCatalogState.Loaded -> Catalog(
                 books = state.books,
                 onBookClicked = bookCatalogViewModel::seeBookDetail,
                 modifier = Modifier.padding(it)
             )
         }
     }
+}
+
+@Composable
+private fun Catalog(
+    books: List<Book>,
+    onBookClicked: (Book.ISBN) -> Unit,
+    modifier: Modifier = Modifier
+) = if (books.isEmpty()) {
+    EmptyCatalog(modifier)
+} else {
+    BookList(
+        books = books,
+        onBookClicked = onBookClicked,
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -67,6 +83,19 @@ private fun BookList(
         }
     }
 }
+
+@Composable
+private fun EmptyCatalog(modifier: Modifier = Modifier) =
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.empty_catalog),
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center
+        )
+    }
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
